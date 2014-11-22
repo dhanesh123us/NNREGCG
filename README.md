@@ -105,22 +105,13 @@ n
 ####Explanation of Input Arguments to be supplied:
 
 1. **Input the file name** -- needs to have data in x1,x2,x3,..,y format where y is the response variable - whitespace is the delimiter supported
-sq
 2. **Input the no. of input, output and determinant** -- determinant means the number of hidden neurons
-1 1 1
 3. **Input the Min. & Max. Scaling Values resp.** -- response variable is uniformly scaled based on min, max values*
-0.1 0.9
 4. **Input the Noise Factor** -- this is currently not used - I had originally coded a feature to randomly perturb the optimizer to get out of local optima. Only random re-initialization is carried out currently
-0.2
 5. **Input the tolerance for line searches** -- this is exit criteria for line search - how small the step-size gets during the line search*
-0.001
 6. **Input the step size for bounding phase** -- this is the step-size is used for bounding a minimum before line search is used
-0.5
 7. **Input the max. allowed training error** -- tolerance on 1/2 sum of squared error
-1e-12
 8. **Input the tolerance for adding noise** -- error decay tolerance that triggers a random initialization
-1e-9
-
 
 ####Improvements to this code
 
