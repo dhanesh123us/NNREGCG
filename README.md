@@ -1,26 +1,29 @@
 NNREGCG
 =======
 
-A "dynamic" 3 layered neural net regression code using conjugate gradient algorithm for training
+##A "dynamic" 3 layered neural net regression code using conjugate gradient algorithm for training
 ======================================================================================
 
-Features of this code:
+Caution: This code was used for an engineering design application during my PhD work nearly 15 years ago. I abandoned this work after a year and switched to other topics. Hence I neither cleaned this code up or optimized it for performance. Luckily the code does work but do use it at your own risk.
 
-1. least squares cost function for error
-2. a Polak-Ribiere CG training algorithm (with Powell restart strategy)
-3. Ability to add some noise to the optimizer to prevent it from getting stuck in local optima
-4. Weight reinitializations to random weights in case training error target is not met
-5. Hidden neurons automatically increased after certain number of weight re-initializations
+#Features of this code:
+=====================
 
-http://en.wikipedia.org/wiki/Nonlinear_conjugate_gradient_method
+1. Sum of squared errors cost function
+2. A Polak-Ribiere CG training algorithm (with Powell restart strategy) http://en.wikipedia.org/wiki/Nonlinear_conjugate_gradient_method
+3. Reinitialization of Input-Hidden and Hidden-Output Weight to random values in case training error target is not met or error decay is very small
+4. Hidden neurons automatically increased after certain weight weight re-initializations (currently hard coded at 50)
+5. Training exits after 10,000 iterations (hard coded)
 
-How to use:
 
-Compile nnopt.C using g++. Only supported platform is Unix right now since a word count utility is run internally to count the number of data points.
+##How to use:
+===========
+
+Compile nnopt.C using g++. Only supported platform is Linux, Mac or Cygwin (for Windows) right now since a word count utility is run internally to count the number of data points. Below is an example run for fitting y=x^2 (sample points are given in file 'sq')
 
 ```
-Dhaneshs-MacBook-Air-9:NNREGCG dhanesh.padmanabhan$ g++ nnopt.C
-Dhaneshs-MacBook-Air-9:NNREGCG dhanesh.padmanabhan$ ./a.out
+$ g++ nnopt.C
+$ ./a.out
 Input the file name
 sq
 Input the no. of input, output and determinant
@@ -99,14 +102,34 @@ Type the input
 Predicted : 144.117
 Wanna predict? <type 'y' for yes>
 n
-Dhaneshs-MacBook-Air-9:NNREGCG dhanesh.padmanabhan$ 
 ```
 
+##Explanation of Input Arguments to be supplied:
+============================================
 
-I guess lot of improvements can be done to this code: 
-1. generalizing this for classification problems, 
-2. support for categorical variables, 
-3. Adding a Stochastic Gradient Descent variant for large scale data, 
-4. Better interface (programmatic as supposed to interactive)
-5. Ability to read in weight & hidden bias files and NN architecture for prediction (scale parameters not stored currently)
+1. Input the file name (needs to have data in x1,x2,x3,..,y format where y is the response variable - whitespace is the delimiter supported)
+sq
+2. Input the no. of input, output and determinant (determinant means the number of hidden neurons)
+1 1 1
+3. Input the Min. & Max. Scaling Values resp. (response variable is uniformly scaled based on min, max values)
+0.1 0.9
+4. Input the Noise Factor (this is currently not used - I had originally coded a feature to randomly perturb the optimizer to get out of local optima. Only random re-initialization is carried out currently)
+0.2
+5. Input the tolerance for line searches (this is exit criteria for line search - how small the step-size gets during the line search)
+0.001
+6. Input the step size for bounding phase (this is the step-size is used for bounding a minimum before line search is used)
+0.5
+7. Input the max. allowed training error (tolerance on 0.5* sum of squared error)
+1e-12
+8. Input the tolerance for adding noise (error decay tolerance that triggers a random initialization)
+1e-9
 
+
+##Improvements to this code
+==========================
+
+1. Ability to read in weight & hidden bias files and NN architecture for prediction (scale parameters not stored currently)
+2. generalizing this for classification problems, 
+3. support for categorical variables, 
+4. Adding a Stochastic Gradient Descent variant for large scale data, 
+5. Better interface (programmatic as supposed to interactive)
