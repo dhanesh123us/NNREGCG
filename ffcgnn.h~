@@ -1,8 +1,8 @@
-#include <iostream>
-#include <cstdlib>
-#include <fstream>
+#include <iostream.h>
+#include <stdlib.h>
+#include <fstream.h>
 #include <math.h>
-#include <cstring>
+#include <string.h>
 #include <time.h>
 #define IA 16807
 #define IM 2147483647
@@ -14,8 +14,6 @@
 #define EPS 1.2e-7
 #define RNMX (1.0-EPS)
 #define MAXBND 1.0e3
-
-using namespace std;
 
 double global_error;
 
