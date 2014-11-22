@@ -1,7 +1,7 @@
 NNREGCG
 =======
 
-###A "dynamic" 3 layered neural net regression code using conjugate gradient algorithm for training
+###A "dynamic" 3 layered neural net regression code using conjugate gradient algorithm
 ======================================================================================
 
 Caution: This code was used for an engineering design application during my PhD work nearly 15 years ago. I abandoned this work after a year and switched to other topics. Hence I neither cleaned this code up nor optimized it for performance. Luckily the code does work but do use it at your own risk.
@@ -10,7 +10,7 @@ Caution: This code was used for an engineering design application during my PhD 
 
 1. Sum of squared errors cost function
 2. A Polak-Ribiere CG training algorithm (with Powell restart strategy) http://en.wikipedia.org/wiki/Nonlinear_conjugate_gradient_method
-3. Reinitialization of Input-Hidden and Hidden-Output Weight to random values in case training error target is not met or error decay is very small
+3. Reinitialization of NN weights and bias terms to random values in case training error target is not met or error decay is very small
 4. Hidden neurons automatically increased after certain weight weight re-initializations (currently hard coded at 50)
 5. Training exits after 10,000 iterations (hard coded)
 
